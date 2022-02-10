@@ -1,12 +1,15 @@
 //importar variables de entornos locales
 
-require('dotenv').config()
+require('dotenv').config({path:'../.env'})
 console.log(process.env.URL_DB)
 
 const conectdb = {
     // db      :    process.env.MONGODB || 'mongodb://localhost:27017/apilogin',
-    // db      :    process.env.MONGODB || process.env.URL_DB
-    db      :    'mongodb+srv://kevin:KeeD29@users.xgtm5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+    
+    db      :    process.env.URL_DB
+
+    //este si funciona en heroku
+    // db      :    'mongodb+srv://kevin:KeeD29@users.xgtm5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 }
 
 const port = process.env.PORT || 8005
