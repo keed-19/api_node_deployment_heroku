@@ -82,13 +82,14 @@ router.post('/login', async (req, res) => {
         //     id: user._id
         // }, process.env.TOKEN_SECRET)
       // Creando token
-        // const token = jwt.sign({
-        //     num_Telefono: user.num_Telefono,
-        //     id: user._id
-        // }, process.env.TOKEN_SECRET) 
+        const token = jwt.sign({
+            num_Telefono: user.num_Telefono,
+            id: user._id
+        }, process.env.TOKEN_SECRET) 
         
-        res.json({
+        res.send({
             error: null,
+            data: { token },
             message: 'Bienvenido'
         })
     } 
