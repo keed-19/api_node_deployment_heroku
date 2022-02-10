@@ -74,24 +74,30 @@ router.post('/login', async (req, res) => {
 
     // Validacion de password en la base de datos
     const validPassword = await bcrypt.compare(req.body.password, user.password)
-    if(!validPassword) return res.status(400).json({error: 'Constraseña invalida'})
+    if(!validPassword){
+        return res.status(400).json({error: 'Constraseña invalida'})
+    }else{
+        // const token = jwt.sign({
+        //     num_Telefono: user.num_Telefono,
+        //     id: user._id
+        // }, process.env.TOKEN_SECRET)
+      // Creando token
+        const token = jwt.sign({
+            num_Telefono: user.num_Telefono,
+            id: user._id
+        }) 
+        
+        res.send({
+            error: null,
+            data: { token },
+            message: 'Bienvenido'
+        })
+    } 
 
-    // Creando token
-    const token = jwt.sign({
-        num_Telefono: user.num_Telefono,
-        id: user._id
-    }, process.env.TOKEN_SECRET)
-
-    // res.send({
-    //         error: null,
-    //         data: { token },
-    //         message: 'Bienvenido'
-    //     })
-
-    res.json({
-        error: null,
-        data: 'bienvenido'
-    })
+    // res.json({
+    //     error: null,
+    //     data: 'bienvenido'
+    // })
 })
 
 
