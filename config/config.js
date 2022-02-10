@@ -9,7 +9,7 @@ const conectdb = {
 }
 
 const port = process.env.PORT || 8005
-const host = process.env.HOST || 'https://secret-lowlands-29352.herokuapp.com/'
+const host = process.env.HOST || ''
 
 //TODO: en produccion
 
