@@ -77,10 +77,6 @@ router.post('/login', async (req, res) => {
     if(!validPassword){
         return res.status(400).json({error: 'Constraseña invalida'})
     }else{
-        // const token = jwt.sign({
-        //     num_Telefono: user.num_Telefono,
-        //     id: user._id
-        // }, process.env.TOKEN_SECRET)
       // Creando token
         const token = jwt.sign({
             num_Telefono: user.num_Telefono,
@@ -92,6 +88,18 @@ router.post('/login', async (req, res) => {
             data: { token },
             message: 'Bienvenido'
         })
+
+        var accountSid = 'AC43a41423f1bdec4ad27bbd8e254407f2'; // Tu Account SID obtenido de www.twilio.com/console
+        var authToken = '7077ccc41aa2784f647ffe7273ca3b61'; // Tu Auth Token
+        var twilio = require('twilio');
+        var client = new twilio(accountSid, authToken);
+
+        client.messages.create({
+            body: 'Hello from Node',
+            to: user.num_Telefono,  // Número al que se enviará el SMS
+            from: '9192389847' // Número comprado de Twilio.com
+        })
+        .then((message) => console.log(message.sid));
     } 
 
     // res.json({
