@@ -11,16 +11,6 @@ const conectdb = {
 const port = process.env.PORT || 8005
 const host = process.env.HOST || '0.0.0.0'
 
-
-var corsOptions = {
-    optionsSuccessStatus: 200, // Es necesario para navegadores antiguos o algunos SmartTVs
-    headers: {
-        'Content-Type' : 'application/json',
-        'Access-Control-Allow-Headers' : '*',
-        'access-control-allow-headers' : '*'
-    },
-}
-
 //TODO: en produccion
 
     const application = {
@@ -39,6 +29,5 @@ module.exports  =   {
     conectdb,
     port,
     host,
-    corsOptions, 
     application
 }
