@@ -9,7 +9,7 @@ const conectdb = {
 }
 
 const port = process.env.PORT || 8005
-const host = process.env.HOST || ''
+const host = 'localhost' || ''
 
 //TODO: en produccion
 
