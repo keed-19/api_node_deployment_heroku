@@ -89,6 +89,7 @@ router.post('/login', async (req, res) => {
             message: 'Bienvenido'
         })
 
+        //todo
         var accountSid = 'AC43a41423f1bdec4ad27bbd8e254407f2'; // Tu Account SID obtenido de www.twilio.com/console
         var authToken = '7077ccc41aa2784f647ffe7273ca3b61'; // Tu Auth Token
         var twilio = require('twilio');
@@ -96,8 +97,8 @@ router.post('/login', async (req, res) => {
 
         client.messages.create({
             body: 'Hello from Node',
-            to: `+52${user.num_Telefono}`,  // Número al que se enviará el SMS
-            from: '+529192389847' // Número comprado de Twilio.com
+            to: `+521${user.num_Telefono}`,  // Número al que se enviará el SMS
+            from: '+5219192389847' // Número comprado de Twilio.com
         })
         .then((message) => console.log(message.sid));
     } 
