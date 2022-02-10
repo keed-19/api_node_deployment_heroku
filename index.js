@@ -11,7 +11,7 @@ mongoose.connect(config.conectdb.db, (err, res) => {
     }
     console.log('La conexion a la base de datos ha sido exitosa')
 
-    app.listen(config.host,config.port, () =>  {
+    app.listen(config.port, config.host, () =>  {
         console.log(`API REST corriendo en http://${config.host}:${config.port}`)
     })
 
