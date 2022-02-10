@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Creamos la variable de configuración
 
-app.use('/api', authRoutes)
+app.use('/', authRoutes)
 
 //TODO:falta por acomodar esta ruta en el archivo de rutas
 //verificacion del token con el middleware
