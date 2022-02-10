@@ -107,12 +107,14 @@ router.post('/login', async (req, res) => {
 
 
 router.get('/users', async(req, res)=>{
-    User.find({}, (err, users) => {
-        if(err) return res.status(500).send({ message: `Error al hacer la petición: ${err}`})
-        if(!users) return res.status(404).send({ message: `Aun no existen usuarios en la base de datos`})
 
-        res.json(200, {users})
-    })
+    res.json(200,'esto si funciona')
+    // User.find({}, (err, users) => {
+    //     if(err) return res.status(500).send({ message: `Error al hacer la petición: ${err}`})
+    //     if(!users) return res.status(404).send({ message: `Aun no existen usuarios en la base de datos`})
+
+    //     res.json(200, {users})
+    // })
 })
 
 module.exports = router
