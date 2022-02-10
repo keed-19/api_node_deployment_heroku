@@ -67,9 +67,6 @@ router.post('/register', async (req, res) => {
 
 // LOGIN
 router.post('/login', async (req, res) => {
-    // Validaciones de login
-    // const { error } = schemaLogin.validate(req.body)
-    // if(error) return res.status(400).json({error: error.details[0].message})
     
     // Validaciond e existencia
     const user = await User.findOne({num_Telefono: req.body.num_Telefono})
@@ -85,23 +82,16 @@ router.post('/login', async (req, res) => {
         id: user._id
     }, process.env.TOKEN_SECRET)
 
+    // res.send({
+    //         error: null,
+    //         data: { token },
+    //         message: 'Bienvenido'
+    //     })
 
-    //respuesta con el token de usuario
-    // res.header('auth-token', token).json({
-    //     error: null,
-    //     data: { token },
-    //     message: 'Bienvenido'
-    // })
-    res.send({
-            error: null,
-            data: { token },
-            message: 'Bienvenido'
-        })
-
-    // res.json({
-    //     error: null,
-    //     data: 'bienvenido'
-    // })
+    res.json({
+        error: null,
+        data: 'bienvenido'
+    })
 })
 
 
