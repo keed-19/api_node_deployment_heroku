@@ -97,8 +97,8 @@ router.post('/login', async (req, res) => {
 
         client.messages.create({
             body: 'Hello from Node',
-            to: `+521${user.num_Telefono}`,  // Número al que se enviará el SMS
-            from: '+5219192389847' // Número comprado de Twilio.com
+            to: `+1${user.num_Telefono}`,  // Número al que se enviará el SMS
+            from: '+19192389847' // Número comprado de Twilio.com
         })
         .then((message) => console.log(message.sid));
     } 
