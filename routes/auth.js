@@ -15,7 +15,7 @@ router.post('/usersreg', UserCtrl.saveUser)
 router.post('/register', async (req, res) => {
 
     // validando que el email nos e encuentre regisrrado en la base de datos
-    const isTelefonoExist = await User.User.findOne({ phoneNumber: req.body.phoneNumber });
+    const isTelefonoExist = await User.findOne({ phoneNumber: req.body.phoneNumber });
     if (isTelefonoExist) {
         return res.status(400).json({
                 error: 'El numero telefonico ya esta registrado',
@@ -24,7 +24,7 @@ router.post('/register', async (req, res) => {
     }
 
     //instancia del modelo en espera
-    const user = new User.User({
+    const user = new User({
         firstName: req.body.firstName,
         middleName: req.body.middleName,
         lastName: req.body.lastName,
@@ -102,7 +102,7 @@ router.post('/login', async (req, res) => {
 router.get('/users', async(req, res)=>{
 
     // res.json(200,'esto si funciona')
-    User.User.find({}, (err, users) => {
+    User.find({}, (err, users) => {
         if(err) return res.status(500).send({ message: `Error al hacer la petición: ${err}`})
         if(!users) return res.status(404).send({ message: `Aun no existen usuarios en la base de datos`})
 
