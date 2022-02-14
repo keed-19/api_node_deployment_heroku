@@ -57,8 +57,4 @@ const RegisterRequests = mongoose.Schema ({
     tokenTotp: string,
 })
 
-// module.exports = mongoose.model('User', userSchema)
-module.exports = mongoose.model({
-    'User': userSchema,
-    'Client': Clients
-})
+module.exports = mongoose.model('User', userSchema)
