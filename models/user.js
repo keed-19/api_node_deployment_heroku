@@ -43,7 +43,7 @@ const Clients = mongoose.Schema ({
     lastName: String,
     phoneNumber: String,
     birthday: Date,
-    externalId?: Number,
+    externalId: Number,
 })
 
 const Users = mongoose.Schema ({
