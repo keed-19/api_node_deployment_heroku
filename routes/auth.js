@@ -13,32 +13,17 @@ router.post('/usersreg', UserCtrl.saveUser)
 
 //register
 router.post('/register', async (req, res) => {
-    // Dentro del método que invoca POST 
-    // Usaremos la propiedad error del objeto que nos entrega schemaRegister.validate()
-    // const { error } = schemaRegister.validate(req.body)
-
-    // // Si este error existe, aqui se termina la ejecución devolviedonos el error
-    // if (error) {
-    //     return res.status(400).json(
-    //         { error: error.details[0].message }
-    //     )
-    // }
 
     // validando que el email nos e encuentre regisrrado en la base de datos
     const isTelefonoExist = await User.findOne({ phoneNumber: req.body.phoneNumber });
     if (isTelefonoExist) {
-        return res.status(400).json(
-            {
+        return res.status(400).json({
                 error: 'El numero telefonico ya esta registrado',
-                status: 208 //en caso de que ya este este registrado ese numero
-            }
-        )
+                status: 208
+            });
     }
 
-    //encriptacion de la contrasseña con un numero aleatorio de la libreria bycript
-    // const salt = await bcrypt.genSalt(10)
-    // const password = await bcrypt.hash(req.body.password, salt)
-
+    //instancia del modelo en espera
     const user = new User({
         firstName: req.body.firstName,
         middleName: req.body.middleName,
@@ -49,25 +34,21 @@ router.post('/register', async (req, res) => {
         email: req.body.email
     });
 
-    // Creamos el objeto usando el model que creaos anteriormente
-    // const user = new User({
-    //     name: req.body.name,
-    //     email: req.body.email,
-    //     password: req.body.password
-    // });
-    // Usamos .save() del model para almacenar los datos en Mongo
     try {
-        const savedUser = await user.save()
+
+        //almacenando los datos y devolviendo respuesta
+        const savedUser = await user.save();
+
         res.json({
             message: 'usuario registrado',
             status: 200,
             data: savedUser
-        })
+        });
     } catch (error) {
         res.status(400).json({
             error,
             status: 400
-        })
+        });
     }
 })
 
