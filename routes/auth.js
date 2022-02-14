@@ -64,14 +64,9 @@ router.post('/login', async (req, res) => {
     })
 
     // Validacion de password en la base de datos
-    const validPassword = await bcrypt.compare(req.body.password, user.password)
-    if(user.password =! req.body.password){
-        return res.status(400).json({
-            error: 'Constraseña invalida',
-            status: 203
-        })
-    }else{
-      // Creando token
+    // const validPassword = await bcrypt.compare(req.body.password, user.password)
+    if(user.password === req.body.password){
+        // Creando token
         const token = jwt.sign({
             num_Telefono: user.num_Telefono,
             id: user._id
@@ -81,6 +76,12 @@ router.post('/login', async (req, res) => {
             status:200,
             data: { token },
             message: 'Bienvenido'
+        })
+    }else{
+      
+        return res.status(400).json({
+            error: 'Constraseña invalida',
+            status: 203
         })
 
         // //TODOS: falta por enviar el sms
