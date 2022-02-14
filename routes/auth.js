@@ -28,21 +28,25 @@ router.post('/register', async (req, res) => {
     const isTelefonoExist = await User.findOne({ num_Telefono: req.body.num_Telefono });
     if (isTelefonoExist) {
         return res.status(400).json(
-            {error: 'El numero telefonico ya esta registrado'}
+            {
+                error: 'El numero telefonico ya esta registrado',
+                status: 208 //en caso de que ya este este registrado ese numero
+            }
         )
     }
 
     //encriptacion de la contrasseña con un numero aleatorio de la libreria bycript
-    const salt = await bcrypt.genSalt(10)
-    const password = await bcrypt.hash(req.body.password, salt)
+    // const salt = await bcrypt.genSalt(10)
+    // const password = await bcrypt.hash(req.body.password, salt)
 
     const user = new User({
-        name: req.body.name,
-        apellido_P: req.body.apellido_P,
-        apellido_M: req.body.apellido_M,
-        f_Nacimiento: req.body.f_Nacimiento,
-        num_Telefono: req.body.num_Telefono,
-        password: password
+        firstName: req.body.firstName,
+        middleName: req.body.middleName,
+        lastName: req.body.lastName,
+        birthday: req.body.birthday,
+        phoneNumber: req.body.phoneNumber,
+        password: req.body.password,
+        email: req.body.email
     });
 
     // Creamos el objeto usando el model que creaos anteriormente
@@ -56,11 +60,14 @@ router.post('/register', async (req, res) => {
         const savedUser = await user.save()
         res.json({
             message: 'usuario registrado',
-            error: null,
+            status: 200,
             data: savedUser
         })
     } catch (error) {
-        res.status(400).json({error})
+        res.status(400).json({
+            error,
+            status: 400
+        })
     }
 })
 
@@ -89,18 +96,18 @@ router.post('/login', async (req, res) => {
             message: 'Bienvenido'
         })
 
-        //todo
-        var accountSid = 'AC43a41423f1bdec4ad27bbd8e254407f2'; // Tu Account SID obtenido de www.twilio.com/console
-        var authToken = '7077ccc41aa2784f647ffe7273ca3b61'; // Tu Auth Token
-        var twilio = require('twilio');
-        var client = new twilio(accountSid, authToken);
+        // //TODOS: falta por enviar el sms
+        // var accountSid = 'AC43a41423f1bdec4ad27bbd8e254407f2'; // Tu Account SID obtenido de www.twilio.com/console
+        // var authToken = '7077ccc41aa2784f647ffe7273ca3b61'; // Tu Auth Token
+        // var twilio = require('twilio');
+        // var client = new twilio(accountSid, authToken);
 
-        client.messages.create({
-            body: 'Hello from Node',
-            to: `+1${user.num_Telefono}`,  // Número al que se enviará el SMS
-            from: '+19192389847' // Número comprado de Twilio.com
-        })
-        .then((message) => console.log(message.sid));
+        // client.messages.create({
+        //     body: 'Hello from Node',
+        //     to: `+1${user.num_Telefono}`,  // Número al que se enviará el SMS
+        //     from: '+19192389847' // Número comprado de Twilio.com
+        // })
+        // .then((message) => console.log(message.sid));
     } 
 
     // res.json({

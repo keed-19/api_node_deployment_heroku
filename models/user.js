@@ -1,39 +1,35 @@
+const { string } = require('@hapi/joi')
 const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema({
-    name: {
+    firstName: {
         type: String,
-        require: true,
-        min: 3,
-        max: 255
+        require: true
     },
-    apellido_P: {
+    middleName: {
         type: String,
-        require: true,
-        min: 3,
-        max: 255
+        require: true
     },
-    apellido_M: {
+    lastName: {
         type: String,
-        require: true,
-        min: 3,
-        max: 255
+        require: true
     },
-    f_Nacimiento: {
-        type: String,
-        require: true,
-        min: 3,
-        max: 255
-    },
-    num_Telefono : {
+    phoneNumber : {
         type: Number,
-        require: true,
+        require: true
+    },
+    birthday: {
+        type: String,
+        require: true
     },
     password: {
         type: String,
-        require: true,
-        minlength: 6
+        require: true
     },
+    email: {
+        type: String,
+        require: true,
+    }
 })
 
 module.exports = mongoose.model('User', userSchema)
