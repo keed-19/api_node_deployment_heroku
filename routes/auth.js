@@ -55,21 +55,24 @@ router.post('/register', async (req, res) => {
 
 // LOGIN
 router.post('/login', async (req, res) => {
+
+    const pass = req.body.password;
+    const numuser = req.body.phoneNumber;
     
     // Validaciond e existencia
-    const user = await User.findOne({num_Telefono: req.body.phoneNumber})
-    if(!user) return res.status(400).json({
+    const user = await User.findOne({num_Telefono: numuser})
+    if(!user) {
+        return res.status(400).json({
         error: 'Usuario no encontrado',
         status: 204
-    })
-
-    // Validacion de password en la base de datos
+        })
+    }else{
+        // Validacion de password en la base de datos
     // const validPassword = await bcrypt.compare(req.body.password, user.password)
-    if(user.password === req.body.password){
+    if(user.password === pass){
         // Creando token
         const token = jwt.sign({
-            num_Telefono: user.num_Telefono,
-            id: user._id
+            user
         }, process.env.TOKEN_SECRET) 
         
         res.send({
@@ -97,6 +100,9 @@ router.post('/login', async (req, res) => {
         // })
         // .then((message) => console.log(message.sid));
     } 
+    }
+
+    
 
     // res.json({
     //     error: null,
