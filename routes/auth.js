@@ -71,11 +71,11 @@ router.post('/login', async (req, res) => {
     // const validPassword = await bcrypt.compare(req.body.password, user.password)
         
         // Creando token
-        const token = jwt.sign({
+        const token = await jwt.sign({
             user
         }, process.env.TOKEN_SECRET) 
         
-        res.send({
+        await res.send({
             status:200,
             data: { token },
             message: 'Bienvenido'
