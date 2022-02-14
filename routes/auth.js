@@ -60,7 +60,7 @@ router.post('/login', async (req, res) => {
     const numuser = req.body.phoneNumber;
     
     // Validaciond e existencia
-    const user = await User.findOne({num_Telefono: numuser})
+    const user = await User.findOne({phoneNumber: numuser})
     if(!user) {
         return res.status(400).json({
         error: 'Usuario no encontrado',
