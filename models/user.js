@@ -31,30 +31,30 @@ const userSchema = mongoose.Schema({
     }
 })
 
-const AuditFields = mongoose.Schema ({
-    createdAt: Date,
-    updatedAt: Date,
-    deletedAt: Date
-})
+// const AuditFields = mongoose.Schema ({
+//     createdAt: Date,
+//     updatedAt: Date,
+//     deletedAt: Date
+// })
 
-const Clients = mongoose.Schema ({
-    firstName: String,
-    middleName: String,
-    lastName: String,
-    phoneNumber: String,
-    birthday: Date,
-    externalId: Number,
-})
+// const Clients = mongoose.Schema ({
+//     firstName: String,
+//     middleName: String,
+//     lastName: String,
+//     phoneNumber: String,
+//     birthday: Date,
+//     externalId: Number,
+// })
 
-const Users = mongoose.Schema ({
-    username: string, // es el número de telefono del registro 
-    password: string,
-    email?: string,
-    clientId?: string,
-})
+// const Users = mongoose.Schema ({
+//     username: string, // es el número de telefono del registro 
+//     password: string,
+//     email?: string,
+//     clientId?: string,
+// })
 
-const RegisterRequests = mongoose.Schema ({
-    tokenTotp: string,
-})
+// const RegisterRequests = mongoose.Schema ({
+//     tokenTotp: string,
+// })
 
 module.exports = mongoose.model('User', userSchema)
