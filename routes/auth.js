@@ -25,7 +25,7 @@ router.post('/register', async (req, res) => {
     // }
 
     // validando que el email nos e encuentre regisrrado en la base de datos
-    const isTelefonoExist = await User.findOne({ num_Telefono: req.body.num_Telefono });
+    const isTelefonoExist = await User.findOne({ phoneNumber: req.body.phoneNumber });
     if (isTelefonoExist) {
         return res.status(400).json(
             {
