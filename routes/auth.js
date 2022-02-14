@@ -57,13 +57,19 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     
     // Validaciond e existencia
-    const user = await User.findOne({num_Telefono: req.body.num_Telefono})
-    if(!user) return res.status(400).json({error: 'Usuario no encontrado'})
+    const user = await User.findOne({num_Telefono: req.body.phoneNumber})
+    if(!user) return res.status(400).json({
+        error: 'Usuario no encontrado',
+        status: 204
+    })
 
     // Validacion de password en la base de datos
     const validPassword = await bcrypt.compare(req.body.password, user.password)
-    if(!validPassword){
-        return res.status(400).json({error: 'Constraseña invalida'})
+    if(user.password =! req.body.password){
+        return res.status(400).json({
+            error: 'Constraseña invalida',
+            status: 203
+        })
     }else{
       // Creando token
         const token = jwt.sign({
@@ -72,7 +78,7 @@ router.post('/login', async (req, res) => {
         }, process.env.TOKEN_SECRET) 
         
         res.send({
-            error: null,
+            status:200,
             data: { token },
             message: 'Bienvenido'
         })
