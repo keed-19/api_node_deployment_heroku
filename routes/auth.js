@@ -78,7 +78,7 @@ router.post('/login', async (req, res) => {
             user
         }, process.env.TOKEN_SECRET);
 
-        //creando el mensage de bienbenida
+        //creando el mensage de bienvenida
 
         client.messages
         .create({
@@ -110,7 +110,7 @@ router.get('/users', async(req, res)=>{
     // res.json(200,'esto si funciona')
     User.find({}, (err, users) => {
         if(err) return res.status(500).send({ message: `Error al hacer la petición: ${err}`})
-        if(!users) return res.status(404).send({ message: `Aun no existen usuarios en la base de datos`})
+        if(!users) return res.status(404).send({ message: `Aún no existen usuarios en la base de datos`})
 
         res.json(200, {users})
     })
