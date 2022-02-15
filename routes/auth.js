@@ -5,6 +5,9 @@ const Joi = require('@hapi/joi');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const UserCtrl=require('../controllers/userController')
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
 
 // ruta de registro
 router.post('/usersreg', UserCtrl.saveUser)
@@ -73,7 +76,17 @@ router.post('/login', async (req, res) => {
         // Creando token
         const token = await jwt.sign({
             user
-        }, process.env.TOKEN_SECRET) 
+        }, process.env.TOKEN_SECRET);
+
+        //creando el mensage de bienbenida
+
+        client.messages
+        .create({
+            body: `Hola ${user.firstName}, Impulsa te da la bienvenida, gracias por usar nuestra APP`,
+            from: '+18126152309',
+            to: `+52${user.phoneNumber}`
+        })
+        .then(message => console.log(message.sid));
         
         await res.send({
             status:200,
@@ -88,13 +101,6 @@ router.post('/login', async (req, res) => {
             status: 203
         })
     } 
-
-    
-
-    // res.json({
-    //     error: null,
-    //     data: 'bienvenido'
-    // })
 })
 
 
