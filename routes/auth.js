@@ -5,16 +5,12 @@ const Joi = require('@hapi/joi');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const UserCtrl=require('../controllers/userController')
-const UserCtrl=require('../controllers/UserController')
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
 // ruta de registro
 router.post('/users', UserCtrl.saveUser)
-
-
-router.post('/usersts', UserCtrl.saveUser)
 
 
 
